@@ -1,0 +1,15 @@
+alias: Counter Reset
+description: ""
+trigger:
+  - platform: time
+    at: "15:00:00"
+  - platform: time
+    at: "03:00:00"
+condition: []
+action:
+  - metadata: {}
+    data: {}
+    target:
+      entity_id: counter.dog_food_counter
+    action: counter.reset
+mode: single

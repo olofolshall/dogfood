@@ -1,0 +1,44 @@
+alias: "Dog Food Automation "
+description: ""
+trigger:
+  - platform: time
+    at: "08:15:00"
+  - platform: time
+    at: "19:00:00"
+  - device_id: 1e7af0be8a9584af8de79edd59531e0c
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: remote_button_short_press
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: numeric_state
+            entity_id: counter.dog_food_counter
+            below: 1
+        sequence:
+          - metadata: {}
+            data:
+              message: >-
+                The button has not been pressed. Boston and Berlin are hangry
+                fuckers!
+            action: notify.notify
+      - conditions:
+          - condition: numeric_state
+            entity_id: counter.dog_food_counter
+            above: 0.5
+          - condition: or
+            conditions:
+              - condition: time
+                before: "08:15:00"
+                after: "05:00:00"
+              - condition: time
+                after: "15:00:00"
+                before: "19:00:00"
+        sequence:
+          - metadata: {}
+            data:
+              message: The dogs have been fed!
+            action: notify.notify
+mode: single

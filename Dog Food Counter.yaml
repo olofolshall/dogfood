@@ -1,0 +1,16 @@
+alias: Dog Food Counter
+description: ""
+trigger:
+  - device_id: 1e7af0be8a9584af8de79edd59531e0c
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: remote_button_short_press
+condition: []
+action:
+  - metadata: {}
+    data: {}
+    target:
+      entity_id: counter.dog_food_counter
+    action: counter.increment
+mode: single
